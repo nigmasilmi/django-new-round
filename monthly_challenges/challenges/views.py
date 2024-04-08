@@ -1,8 +1,7 @@
 """challenges views"""
-from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
-
+from django.template.loader import render_to_string
 
 monthly_challenges = {
     'january': 'lorem ipsum january',
@@ -21,6 +20,7 @@ monthly_challenges = {
 
 
 def index(request):
+    """index view"""
     list_items = ""
     months = list(monthly_challenges.keys())
 
@@ -28,12 +28,8 @@ def index(request):
         capitalized_month = month.capitalize()
         month_path = reverse('name-month-challenge', args=[month])
         list_items += f'<li><a href=\"{month_path}\">{capitalized_month}</a></li>'
-
-        response_data = """
-        f'<ul>{list_items}</ul>
-
-        """
-    return HttpResponse(list_items)
+        response_data = f'<ul>{list_items}</ul>'
+    return HttpResponse(response_data)
 
 
 def monthly_challenge_by_number(request, month):
@@ -49,10 +45,9 @@ def monthly_challenge_by_number(request, month):
 
 def monthly_challenge(request, month):
     """View for Challenges with string"""
-    challenge_text = None
     try:
-        challenge_text = monthly_challenges[month]
+        response_data = render_to_string("challenges/challenge.html")
     except KeyError:
         return HttpResponseNotFound('sorry, this challenge is not available')
 
-    return HttpResponse(challenge_text)
+    return HttpResponse(response_data)
