@@ -70,3 +70,11 @@ pipenv --venv
 6.2 In VSCode command palette search for Python interpreter and use the path there and append /bin/python at the end
 Check it in .vscode settings.json
 restart the terminal window in VSCode and the virtual environment terminal with the interpreter will be automatically activated
+
+7. Running the development server
+
+```python
+# from the container project folder
+python manage.py runserver #or
+python3 manage.py runserver
+```
