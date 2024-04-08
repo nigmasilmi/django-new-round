@@ -9,3 +9,5 @@ An app in Django is a Python package that encapsulates related models, views, te
 ```python
 python3 manage.py startapp <name_for_the_package>
 ```
+
+## Urls and Views
