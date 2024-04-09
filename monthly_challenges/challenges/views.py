@@ -46,6 +46,7 @@ def monthly_challenge_by_number(request, month):
 def monthly_challenge(request, month):
     """View for Challenges with string"""
     try:
-        return render(request, "challenges/challenge.html")
+        challenge_text = monthly_challenges[month]
+        return render(request, "challenges/challenge.html", {"challenge_text": challenge_text, "month": month})
     except KeyError:
         return HttpResponseNotFound('sorry, this challenge is not available')
