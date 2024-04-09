@@ -1,7 +1,7 @@
 """challenges views"""
+from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
-from django.template.loader import render_to_string
 
 monthly_challenges = {
     'january': 'lorem ipsum january',
@@ -46,8 +46,6 @@ def monthly_challenge_by_number(request, month):
 def monthly_challenge(request, month):
     """View for Challenges with string"""
     try:
-        response_data = render_to_string("challenges/challenge.html")
+        return render(request, "challenges/challenge.html")
     except KeyError:
         return HttpResponseNotFound('sorry, this challenge is not available')
-
-    return HttpResponse(response_data)

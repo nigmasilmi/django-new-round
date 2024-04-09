@@ -81,3 +81,36 @@ urlpatterns = [
 ### Name arg and reverse
 
 In the context of Django's URL routing system, "reverse" refers to the process of generating a URL based on a named URL pattern and its corresponding view function. This is particularly useful when you want to create URLs dynamically in your code or templates without hardcoding them.
+
+## Templates folder
+
+```python
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+```
+
+The recommended structure for the templates folder in Django projects is to have subfolders named after each app within the project, and the templates specific to each app should be placed within their respective subfolders. This approach helps maintain a well-organized and structured codebase.
+
+- 'BACKEND': 'django.template.backends.django.DjangoTemplates' specifies the Django template engine.
+- 'DIRS': [] is an empty list by default, which means Django will not search for templates in any specific directories specified here.
+- 'APP_DIRS': True indicates that Django should look for templates within the templates directories of each app in your project. This is the key setting that enables Django to automatically find templates based on the app structure.
+
+When 'APP_DIRS': True, Django will search for templates in the following locations for each app:
+
+/<app_name>/templates/ (inside each app's directory)
+/<project_name>/<app_name>/templates/ (if the app is installed as part of a larger project, Django will also search in this location)
+You can customize this behavior by adding directories to the 'DIRS' list if you want Django to search in additional directories for templates that are not specific to any app. However, the default and recommended approach is to rely on 'APP_DIRS': True for locating app-specific templates.
